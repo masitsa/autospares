@@ -1,0 +1,196 @@
+/* CSS Document */
+
+body{
+	background-image:url(../img/brushed.png);
+	background-repeat:repeat;
+	font-family: 'SansationBold',Verdana,sans-serif;
+    font-size: 14px;
+}
+/* Header */
+.header{
+  	/*background-image: -moz-linear-gradient(top, #E00000, #D00000);
+  	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#E00000), to(#D00000));
+ 	background-image: -webkit-linear-gradient(top, #E00000, #D00000);
+ 	background-image: -o-linear-gradient(top, #E00000, #D00000);
+  	background-image: linear-gradient(to bottom, #E00000, #D00000);*/
+	border-bottom: #060 medium solid;
+    line-height: 30px;
+}
+
+.header p{
+	font-size:30px;
+	font-weight:bolder;
+	color:#D00000;
+	padding-top:2px;
+	text-align:center;
+}
+
+.contacts{
+	font-size:10px;
+	font-weight:bold;
+	color:#D00000;
+	text-align:center;
+    line-height: 15px;
+}
+
+.header img{
+	float:left;
+}
+
+.wrapper{
+	background-image:url(../img/textured_paper.png);
+	padding:20px;
+}
+
+.login{
+	margin-top:5%;
+	margin-left:20%;
+}
+
+.login_title{
+	text-align:center;
+}
+
+.footer{
+	border-top: #060 medium solid;
+	color:#060;
+}
+
+a{
+	color:#D00000;
+}
+
+.login_btn{
+	margin-left:40%;
+}
+
+.control_panel{
+	margin-left:20%;
+}
+
+.control_panel h4{
+	margin-left:20%;
+	color:#060;
+}
+
+.logout{
+	border-bottom: #060 medium solid;
+}
+
+.logout a{ color:#060; padding-left:2%;}
+.logout a, .logout a:visited { text-decoration:none; outline:0;}
+.logout a:hover, .logout a:focus { text-decoration:underline; outline:0 }
+.logout a:active, .logout a:visited { outline:0}
+
+.navigation{
+	margin:0px; 
+	padding:0px;
+}
+
+.navbar-green {
+  background-color: #060;
+  border-color: #060;
+	margin:0px; 
+	padding:0px;
+}
+
+.navbar-green a{ color:#FFF; padding-left:2%;}
+.navbar-green a, .logout a:visited { text-decoration:none; outline:0;}
+.navbar-green a:hover, .logout a:focus {color:#060; text-decoration:underline; outline:0 }
+.navbar-green a:active, .logout a:visited { outline:0}
+
+.navbar-green .navbar-nav > .active > a,
+.navbar-green .navbar-nav > .active > a:hover,
+.navbar-green .navbar-nav > .active > a:focus {
+  color: #555555;
+  background-color: #e7e7e7;
+}
+
+.right_content{
+	background-color:#FFF;
+}
+
+.right_content h4{
+	text-align:left;
+	padding-left:2%;
+	color:#060;
+	text-decoration:underline;
+}
+
+.section_title{
+	text-align:center;
+	color:#D00000;
+	font-size:18px;
+	width:100%;
+	font-weight:bold;
+	border-bottom: #888888 medium solid;
+}
+
+.sub_section_title{
+	text-align:center;
+	color:#060;
+	font-size:14px;
+	width:100%;
+	font-weight:bold;
+}
+
+.sub_section_border{
+	border-right: #888888 medium solid;
+	padding: 1%;
+}
+
+.sub_section_border2{
+	border-right: #888888 medium solid;
+}
+
+.search_buttons{
+	padding-top:6%;
+}
+
+.cafeteria{
+	background-color:#D2322D;
+}
+
+.cafeteria_link{
+	color:#FFF;
+}
+
+.navbar-default .navbar-nav > li {
+	border-right:#FFF thin solid;
+  color: #FFFFFF;
+}
+
+.cafeteria_items{
+	margin-right:0px;
+	margin-left:0px;
+}
+
+.cafeteria_input{
+	width:80px;
+}
+
+.input_form{
+	margin:0 20% 0 20%;
+}
+
+.i_size{
+	font-size:24px;
+}
+
+.main_items{
+	padding-left:10px;
+}
+
+div.fileinput-preview {
+    height: 150px;
+    width: 150px;
+}
+
+.btn_pink{
+	background-color:#912A21;
+	color:#FFF;
+}
+
+.btn_pink:hover{
+	color:#f3f3f3;
+}
