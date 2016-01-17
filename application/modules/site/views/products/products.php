@@ -39,7 +39,17 @@ if($products->num_rows() > 0)
                                 		<a href="'.site_url().'spareparts/'.$product_web_name.'" class="media-box" title="'.$prod_name.'"><img src="'.$image.'" alt="'.$prod_name.'"></a>
                                         <span class="label label-default vehicle-age">'.$product_year.'</span>
                                         <div class="result-item-view-buttons">
-                                        	<a href="'.site_url().'spareparts/'.$product_web_name.'"style="background-color:#4E69A2; color:#fff;" onclick="facebook_share(\''.$product_image_name.'\', \''.$brand.'\', \''.$model.'\', \''.$category_name.'\', \''.$product_selling_price.'\', \''.$tiny_url.'\')"><i class="fa fa-facebook-square"></i> Like</a>
+
+                                        	<a onclick="facebook_share(\''.$product_image_name.'\', \''.$brand.'\', \''.$model.'\', \''.$category_name.'\', \''.$product_selling_price.'\', \''.$tiny_url.'\')">
+                                                    <div data-easyshare data-easyshare-url="'.site_url().'spareparts/'.$product_web_name.'">
+                                                      <!-- Facebook -->
+                                                      <button data-easyshare-button="facebook">
+                                                        <span class="fa fa-facebook"></span>
+                                                        <span>Share</span>
+                                                      </button>
+                                                      <span data-easyshare-button-count="facebook">0</span>
+                                                    </div>
+                                            </a>
                                         	<a href="'.site_url().'spareparts/'.$product_web_name.'"><i class="fa fa-plus"></i> View details</a>
                                         </div>
                                     </div>

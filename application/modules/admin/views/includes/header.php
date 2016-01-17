@@ -48,4 +48,7 @@
   <!-- Favicon -->
    <link rel="shortcut icon" href="<?php echo base_url()."assets/themes/bluish";?>img/favicon/favicon.png">
 <script src="<?php echo base_url()."assets/themes/bluish";?>/js/jquery.js"></script>
+
+
+
 </head>

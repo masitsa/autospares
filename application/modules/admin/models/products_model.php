@@ -955,5 +955,120 @@ class Products_model extends CI_Model
 			return FALSE;
 		}
 	}
+	public function more_info_request($product_id)
+	{
+		$this->load->model('site/email_model');
+		$this->load->library('Mandrill', $this->config->item('mandrill_key'));
+		$this->load->model('site/sms_model');
+
+		$name = $this->input->post('name');
+		$email = $this->input->post('email');
+		$phone = $this->input->post('phone');
+		$preferred_contact = $this->input->post('preferred_contact');
+
+		//retrieve all users
+		$this->db->from('product_request');
+		$this->db->select('*');
+		$this->db->where('name =  "'.$name.'" AND product_id = '.$product_id);
+		$query = $this->db->get();
+
+		if($query->num_rows() > 0)
+		{
+			return FALSE;
+		}
+		else
+		{
+			// get the product name 
+			$product_name = $this->get_product_info($product_id);
+			$data = array(
+				'name'=>ucwords(strtolower($this->input->post('name'))),
+				'email'=>$this->input->post('email'),
+				'phone'=>$this->input->post('phone'),
+				'product_name'=>$product_name,
+				'product_id'=>$this->input->post('product_id'),
+				'preferred_contact'=>$this->input->post('preferred_contact'),
+				'created'=>date('Y-m-d')
+			);			
+			if($this->db->insert('product_request', $data))
+			{
+				$product_details = $this->products_model->get_product($product_id);
+				$cat = $product_details->row();
+
+				$product_code = $cat->product_code;
+				$product_year = $cat->product_year;
+				$product_id = $cat->product_id;
+				$product_description = $cat->product_description;
+				$product_balance = $cat->product_balance;
+				$tiny_url = $cat->tiny_url;
+				$category_name = $cat->category_name;
+				$product_date = date('jS M Y',strtotime($cat->product_date));
+				$product_year = $cat->product_year;
+				$model = $cat->brand_model_name;
+				$brand = $cat->brand_name;
+				$customer_name = $cat->customer_name;
+				$customer_phone = $cat->customer_phone;
+				$customer_email = $cat->customer_email;
+
+				$message = 'I am '.$this->input->post('name').', Phone: '.$this->input->post('phone').', please give me more details on '.$tiny_url.' code: '.$product_code.'';
+
+				$this->sms_model->send_sms($customer_phone,$message);
+
+				$subject = "Autospares Product Info ";
+				$message = ' Name :'.$this->input->post('name').' <br>
+							 Email : '.$this->input->post('email').' <br>
+							 Phone : '.$this->input->post('phone').' <br>
+							 Product Name : '.$product_name.' <br>
+						';
+				$sender_email = $this->input->post('email');
+				$shopping = "";
+				$from = $this->input->post('name');
+				
+				$button = '';
+				$button = '';
+			 $this->email_model->send_mandrill_mail('info@autospares.co.ke', "Hi Admin", $subject, $message, $sender_email, $shopping, $from, $button);
+		
+				return TRUE;
+			}
+			else{
+				return FALSE;
+			}
+		}
+		
+	}
+	public function get_product_info($product_id)
+	{
+		//retrieve all users
+		$this->db->from('product');
+		$this->db->select('*');
+		$this->db->where('product_id = '.$product_id);
+		$query = $this->db->get();
+
+		if($query->num_rows() > 0)
+		{
+			foreach ($query->result() as $key) {
+				# code...
+				$product_description = $key->product_description;
+				$product_code = $key->product_code;
+
+				$product_name = $product_code." (".$product_description.")";
+			}
+			return $product_name;
+		}
+		else
+		{
+			$product_name = "";
+			return $product_name;			
+		}
+
+	}
+
+	public function get_product_details($product_id)
+	{
+		$this->db->where('product_id = '.$product_id);
+		$query = $this->db->get('product');
+		
+		return $query;
+	}
+	
 }
 ?>

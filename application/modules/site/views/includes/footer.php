@@ -92,8 +92,107 @@
                 </form>
            	</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-block btn-facebook btn-social"><i class="fa fa-facebook"></i> Login with Facebook</button>
+                <div id="fb-root"></div>
+                <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	
+   //Request more information
+   $(document).on("submit","form#request_more_info_form",function(e)
+     {
+      e.preventDefault();
+      
+      var formData = new FormData(this);
+      
+      var product_id = $(this).attr('product_id');
+
+      $.ajax({
+       type:'POST',
+       url: $(this).attr('action'),
+       data:formData,
+       cache:false,
+       contentType: false,
+       processData: false,
+       dataType: 'json',
+       success:function(data){
+        alert(data.result);
+        location.reload();
+       },
+       error: function(xhr, status, error) {
+        alert("XMLHttpRequest=" + xhr.responseText + "\ntextStatus=" + status + "\nerrorThrown=" + error);
+         location.reload();
+       }
+      });
+      return false;
+     });
+   
+    $(document).on("submit","form#submit_query",function(e)
+     {
+      e.preventDefault();
+      
+      var formData = new FormData(this);
+      
+      // var product_id = $(this).attr('product_id');
+
+      $.ajax({
+       type:'POST',
+       url: $(this).attr('action'),
+       data:formData,
+       cache:false,
+       contentType: false,
+       processData: false,
+       dataType: 'json',
+       success:function(data){
+        alert(data.result);
+        location.reload();
+       },
+       error: function(xhr, status, error) {
+        alert("XMLHttpRequest=" + xhr.responseText + "\ntextStatus=" + status + "\nerrorThrown=" + error);
+         location.reload();
+       }
+      });
+      return false;
+     });
+
+     $(document).on("submit","form#send_to_friend",function(e)
+     {
+      e.preventDefault();
+      
+      var formData = new FormData(this);
+      
+      var product_id = $(this).attr('product_id');
+
+      $.ajax({
+       type:'POST',
+       url: $(this).attr('action'),
+       data:formData,
+       cache:false,
+       contentType: false,
+       processData: false,
+       dataType: 'json',
+       success:function(data){
+        alert(data.result);
+        location.reload();
+       },
+       error: function(xhr, status, error) {
+        alert("XMLHttpRequest=" + xhr.responseText + "\ntextStatus=" + status + "\nerrorThrown=" + error);
+         location.reload();
+       }
+      });
+      return false;
+     });
+</script>
+
+
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=881322258651090";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>

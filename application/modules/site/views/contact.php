@@ -1,58 +1,48 @@
-		<section class="map-box">
-        	<iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15955.283888087797!2d36.82172274530894!3d-1.2811310229756814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ske!4v1411319590582" width="600" height="450" frameborder="0" style="border:0"></iframe>
-		</section>  <!-- /.map-box -->
-        
-		<section class="box">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-                    	<h2 class="text-center fancy-heading text-red"><span>Contact</span></h2>
-                        
-                        <p>
-							I would love to here from you about your thoughts, opinions, suggestions or any other enquiries that you may have. Please feel free to contact me.
-						</p>
-                    </div>
+<div class="main" role="main">
+    	<div id="content" class="content full">
+      		<div class="container">
+            	<div class="listing-header margin-40">
+                	<h2>Contact Us</h2>
                 </div>
                 
-				<div class="row">
-					<div class="col-md-6">
-						<h3>On social media</h3>
-						<br>
-                        
-						<ul class="clean-list contact-info white">
-                            <li>
-                            	<a href="https://www.facebook.com/InchesToStyle" target="_blank"><i class="icon-161"></i> InchesToStyle & Botique i2s</a>
-                            </li>
-                            
-                            <li>
-                            	<a href="https://twitter.com/InchesToStyle" target="_blank"><i class="icon-157"></i> InchesToStyle</a>
-                            </li>
-                            
-                            <li>
-                            	<a href="http://instagram.com/inchestostyle" target="_blank"><i class="icon-158"></i> inches2style</a>
-                            </li>
-                            
-                            <li>
-                            	<a href="https://plus.google.com/+AudreyMasitsa?prsrc=5" target="_blank"><i class="icon-167"></i> +AudreyMasitsa</a>
-                            </li>
-                            
-                            <li>
-                            	<a href="http://pinterest.com/audreym23" target="_blank"><i class="icon-107"></i> audreym23</a>
-                            </li>
-                            
-                            <li>
-                            	<a href="http://www.bloglovin.com/en/blog/3483135/inches-to-style" target="_blank">Bloglovin`</a>
-                            </li>
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<h3>Contact details</h3>
-						<br>
-						<ul class="clean-list contact-info white">
-							<li><b>E-mail: </b> <a href="mailto:inchestostyle@gmail.com ">inchestostyle@gmail.com </a></li>
-							<li><b>Phone: </b> <a href="tel:+254705925498">+254 705 925 498 </a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</section>
+            	<div class="row">
+                	<div class="col-md-3 col-sm-4">
+                    	<i class="fa fa-home"></i></span> <b><?php echo $contacts['company_name'];?>.</b><br>
+							<?php echo $contacts['building'];?> <?php echo $contacts['floor'];?> <?php echo $contacts['location'];?><br>
+							<?php echo $contacts['address'];?>, <?php echo $contacts['post_code'];?> <?php echo $contacts['city'];?><br><br>
+							<i class="fa fa-phone"></i> <b><?php echo $contacts['phone'];?></b><br>
+							<!-- <i class="fa fa-fax"></i> <b></b><br> -->
+							<i class="fa fa-envelope"></i> <a href="mailto:<?php echo $contacts['email'];?>"><?php echo $contacts['email'];?></a><br><br>
+							<i class="fa fa-home"></i> <b><?php echo $contacts['working_weekday']?></b><br>
+							<?php echo $contacts['working_weekend']?>
+                    </div>
+                    <div class="col-md-9 col-sm-8">
+                        <form enctype="multipart/form-data" action="<?php echo base_url();?>submit-query"  id = "submit_query" method="post">
+
+                       		<div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <input type="text" id="name" name="name"  class="form-control input-lg" placeholder="First name*" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" id="email" name="email"  class="form-control input-lg" placeholder="Email*" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="phone" name="phone" class="form-control input-lg" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <textarea cols="6" rows="8" id="query" name="query" class="form-control input-lg" placeholder="Message" required></textarea>
+                                    </div>
+                                    <input id="submit" name="submit" type="submit" class="btn btn-primary btn-lg pull-right" value="Submit now!">
+                              	</div>
+                           	</div>
+                		</form>
+                        <div class="clearfix"></div>
+                        <div id="message"></div>
+                    </div>
+              	</div>
+        	</div>
+      	</div>
+ 	</div>

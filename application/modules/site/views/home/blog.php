@@ -100,21 +100,20 @@
 			$date = date('jS M Y',strtotime($product_review_created));
 			
 			$reviews .= '
-				<li class="item">
-					<div class="post-block post-review-block">
-						<div class="review-status">
-							<strong>'.$product_review_rating.'</strong>
-							<span>Out of 5</span>
-						</div>
-						<h3 class="post-title"><a href="'.site_url().$product_web_name.'">'.$product_review_content.'</a></h3>
-						<div class="post-content">
-							<div class="post-actions">
-								<div class="post-date">'.$date.'</div>
-								<!--<div class="comment-count"><i class="fa fa-thumbs-o-up"></i> 3 <i class="fa fa-thumbs-o-down"></i> 0</div>-->
-							</div>
-						</div>
-					</div>
-				</li>
+
+				<div class="post-block post-review-block">
+                	<div class="review-status">
+                    	<strong>'.$product_review_rating.'</strong>
+                        <span>Out of 5</span>
+                    </div>
+                 	<h3 class="post-title"><a href="'.site_url().$product_web_name.'">'.$product_review_content.'</a></h3>
+                    <div class="post-content">
+                        <div class="post-actions">
+                        	<div class="post-date">'.$date.'</div>
+                        	<div class="comment-count"><i class="fa fa-thumbs-o-up"></i> 3 <i class="fa fa-thumbs-o-down"></i> 0</div>
+                        </div>
+                    </div>
+                </div>
 			';
 		}
 	}
@@ -148,23 +147,18 @@
                     </div>
                     
                     <div class="row">
+
                     	<div class="col-md-8 col-sm-6">
-                        	<!-- Latest Testimonials -->
-							<section class="listing-block latest-testimonials">
-								<div class="listing-header">
-									<h3>Reviews</h3>
-								</div>
-								<div class="listing-container">
-									<div class="carousel-wrapper">
-										<div class="row">
-											<ul class="owl-carousel carousel-fw" id="testimonials-slider" data-columns="3" data-autoplay="5000" data-pagination="no" data-arrows="no" data-single-item="no" data-items-desktop="3" data-items-desktop-small="2" data-items-tablet="2" data-items-mobile="1">
-												<?php echo $reviews;?>
-												
-											</ul>
-										</div>
-									</div>
-								</div>
-							</section>
+                        	
+							<section class="listing-block latest-reviews">
+                            <div class="listing-header">
+                            	<a href="blog-masonry.html" class="btn btn-sm btn-default pull-right">All reviews</a>
+                                <h3>Recent reviews</h3>
+                            </div>
+                            <div class="listing-container">
+                            	<?php echo $reviews;?>
+                            </div>
+                      	</section>
 						
                         </div>
                         
@@ -174,8 +168,18 @@
 							<!-- Connect with us -->
 							<section class="connect-with-us widget-block">
                             
-								<h4><i class="fa fa-facebook"></i> Facebook feed</h4>
-								<div class="fb-post" data-href="https://www.facebook.com/Autospares.co.ke/posts/1599077417023259" data-width="500"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/Autospares.co.ke/posts/1599077417023259"><p>http://www.autospares.co.ke/view-autopart/276</p>Posted by <a href="https://www.facebook.com/Autospares.co.ke">Autospares Online</a> on&nbsp;<a href="https://www.facebook.com/Autospares.co.ke/posts/1599077417023259">Saturday, 4 July 2015</a></blockquote></div></div>
+								<!-- <h4><i class="fa fa-facebook"></i> Facebook feed</h4> -->
+								<!-- <div class="fb-post" data-href="https://www.facebook.com/Autospares.co.ke/posts/1599077417023259" data-width="500"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/Autospares.co.ke/posts/1599077417023259"><p>http://www.autospares.co.ke/view-autopart/276</p>Posted by <a href="https://www.facebook.com/Autospares.co.ke">Autospares Online</a> on&nbsp;<a href="https://www.facebook.com/Autospares.co.ke/posts/1599077417023259">Saturday, 4 July 2015</a></blockquote></div></div> -->
+								<div class="fb-page" data-href="https://www.facebook.com/Autospares.co.ke/" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/Autospares.co.ke/"><a href="https://www.facebook.com/Autospares.co.ke/">Autospares Online</a></blockquote></div></div>
+								<div id="fb-root"></div>
+								<script>(function(d, s, id) {
+								  var js, fjs = d.getElementsByTagName(s)[0];
+								  if (d.getElementById(id)) return;
+								  js = d.createElement(s); js.id = id;
+								  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+								  fjs.parentNode.insertBefore(js, fjs);
+								}(document, 'script', 'facebook-jssdk'));
+								</script>
 							</section>
 						</div>
 					</div>

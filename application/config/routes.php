@@ -192,7 +192,8 @@ $route['spareparts/brand/(:any)/(:any)/(:num)'] = 'site/products/__/$1/$2/__/0/p
 $route['spareparts/brand/(:any)/(:any)'] = 'site/products/__/$1/$2';//brand present
 $route['spareparts/model/(:any)/(:any)/(:any)/(:num)'] = 'site/products/__/$1/$2/$3/0/product_date/DESC/$4';//model present going to next page
 $route['spareparts/model/(:any)/(:any)/(:any)'] = 'site/products/__/$1/$2/$3';//model present
-$route['spareparts/search'] = 'site/products_search';//search present
+$route['search'] = 'site/products_search';//search present
+$route['search-product'] = 'site/search_items';//search present
 $route['spareparts/search/(:any)/(:num)'] = 'site/products/__/$1/__/__/__/0/product_date/DESC/$2';//search present going to next page
 $route['spareparts/search/(:any)'] = 'site/products/__/$1';//search present
 $route['spareparts/featured-sellers'] = 'site/products/__/__/__/__/1';//featured sellers
@@ -200,6 +201,10 @@ $route['spareparts/featured-sellers/(:num)'] = 'site/products/__/__/__/__/1/prod
 $route['spareparts/most-popular'] = 'site/products/__/__/__/__/0/clicks/DESC';//featured sellers
 $route['spareparts/most-popular/(:num)'] = 'site/products/__/__/__/__/0/clicks/DESC/$1';//featured sellers going to next page
 $route['spareparts/(:any)'] = 'site/view_product/$1';//going to single post page
+$route['request-more-info/(:num)'] = 'site/more_info_request/$1';//going to single post page
+$route['send-to-friend/(:num)'] = 'site/send_to_friend/$1';//going to single post page
+$route['submit-query'] = 'site/submit_query';//going to single post page
+
 
 /*
 *	Sell Routes
@@ -233,3 +238,5 @@ $route['administration/contacts'] = 'admin/contacts/show_contacts';
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */
+
+$route['contact'] = 'site/contact';

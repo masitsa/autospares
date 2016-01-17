@@ -46,12 +46,32 @@
                     </ol>
             	</div>
                 
-                <div class="col-md-4 col-sm-6 col-xs-4">
-                	<span class="share-text"><i class="icon-share"></i> Share this</span>
-                	<ul class="utility-icons social-icons social-icons-colored">
-                    	<li class="facebook"><a href="#" onclick="facebook_share('<?php echo $product_image_name;?>', '<?php echo $brand;?> <?php echo $model;?> <?php echo $category_name;?>', '<?php echo $product_selling_price;?>', '<?php echo $tiny_url;?>')"><i class="fa fa-facebook"></i></a></li>
-                    	<li class="twitter"><a href="#" target="_blank" href="https://twitter.com/intent/tweet?screen_name=autosparesk&text=<?php echo $brand;?>%20<?php echo $model;?>%20<?php echo $category_name;?>%20<?php echo $tiny_url; ?>"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
+                <div class="col-md-4 col-sm-6 col-xs-4" style="margin-top:5px;">
+                	<div data-easyshare data-easyshare-url="">
+                              <!-- Facebook -->
+                              <button data-easyshare-button="facebook">
+                                <span class="fa fa-facebook"></span>
+                                <span>Share</span>
+                              </button>
+                              <span data-easyshare-button-count="facebook">0</span>
+
+                              <!-- Twitter -->
+                              <button data-easyshare-button="twitter" data-easyshare-tweet-text="">
+                                <span class="fa fa-twitter"></span>
+                                <span>Tweet</span>
+                              </button>
+                              <span data-easyshare-button-count="twitter">0</span>
+
+                              <!-- Google+ -->
+                              <button data-easyshare-button="google">
+                                <span class="fa fa-google-plus"></span>
+                                <span>+1</span>
+                              </button>
+                              <span data-easyshare-button-count="google">0</span>
+
+                              <div data-easyshare-loader>Loading...</div>
+                            </div>
+
                 </div>
             </div>
       	</div>
@@ -64,7 +84,8 @@
             	<!-- Vehicle Details -->
                 <article class="single-vehicle-details">
                     <div class="single-vehicle-title">
-                        <span class="badge-premium-listing"><?php echo $customer_name;?></span>
+                        <span class="badge-premium-listing" id="status"><?php echo $customer_name;?></span>
+
                         <h2 class="post-title"><?php echo $prod_name;?></h2>
                     </div>
                     <div class="single-listing-actions">
@@ -72,6 +93,38 @@
                             <a href="#" data-toggle="modal" data-target="#loginModal" class="btn btn-default" title="Save this car"><i class="fa fa-star-o"></i> <span>Save this part</span></a>
                             <a href="#" data-toggle="modal" data-target="#infoModal" class="btn btn-default" title="Request more info"><i class="fa fa-info"></i> <span>Contact seller</span></a>
                             <a href="#" data-toggle="modal" data-target="#sendModal" class="btn btn-default" title="Send to a friend"><i class="fa fa-send"></i> <span>Send to a friend</span></a>
+                        </div>
+                        <div class="pull-right" style="margin-top:5px;">
+                             <div data-easyshare data-easyshare-url="">
+                              <!-- Total -->
+                              <button data-easyshare-button="total">
+                                <span>Total</span>
+                              </button>
+                              <span data-easyshare-total-count>0</span>
+
+                              <!-- Facebook -->
+                              <button data-easyshare-button="facebook">
+                                <span class="fa fa-facebook"></span>
+                                <span>Share</span>
+                              </button>
+                              <span data-easyshare-button-count="facebook">0</span>
+
+                              <!-- Twitter -->
+                              <button data-easyshare-button="twitter" data-easyshare-tweet-text="">
+                                <span class="fa fa-twitter"></span>
+                                <span>Tweet</span>
+                              </button>
+                              <span data-easyshare-button-count="twitter">0</span>
+
+                              <!-- Google+ -->
+                              <button data-easyshare-button="google">
+                                <span class="fa fa-google-plus"></span>
+                                <span>+1</span>
+                              </button>
+                              <span data-easyshare-button-count="google">0</span>
+
+                              <div data-easyshare-loader>Loading...</div>
+                            </div>
                         </div>
                         <div class="btn btn-info price">Kes <?php echo $product_selling_price;?></div>
                     </div>
@@ -226,21 +279,22 @@
                             <div class="sidebar-widget widget seller-contact-widget">
                               	<h4 class="widgettitle">Send enquiry</h4>
                                 <div class="vehicle-enquiry-in">
-                                    <form>
-                                        <input type="text" placeholder="Name*" class="form-control" required>
-                                        <input type="email" placeholder="Email address*" class="form-control" required>
+                                  <form enctype="multipart/form-data" product_id="<?php echo $product_id;?>" action="<?php echo base_url();?>submit-query"  id = "submit_query" method="post">
+
+                                        <input type="text" placeholder="Name*" name="name" class="form-control" required>
+                                        <input type="email" placeholder="Email address*" name="email" class="form-control" required>
                                         <div class="row">
-                                            <div class="col-md-7"><input type="text" placeholder="Phone no.*" class="form-control" required></div>
-                                            <div class="col-md-5"><input type="text" placeholder="Zip*" class="form-control" required></div>
+                                            <div class="col-md-7"><input type="text" placeholder="Phone no.*" name="phone" class="form-control" required></div>
+                                            <div class="col-md-5"><input type="text" placeholder="Zip* (254)" name="zip" class="form-control" required></div>
                                         </div>
-                                        <textarea name="comments" class="form-control" placeholder="Your comments"></textarea>
+                                        <textarea name="query" class="form-control" placeholder="Your query" required></textarea>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" id="inlineCheckbox1" value="option1"> Subscribe To <strong>Autospares Alerts</strong>
+                                            <input type="checkbox"  name="subscribe" value="1" checked> Subscribe To <strong>Autospares Alerts</strong>
                                         </label>
                                         <label class="checkbox-inline">
-                                            <input type="checkbox" id="inlineCheckbox2" value="option2"> Remember my details
+                                            <input type="checkbox" id="remember" value=""> Remember my details
                                         </label>
-                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                        <input type="submit" class="btn btn-primary" value="Submit query">
                                     </form>
                                 </div>
                                 <div class="vehicle-enquiry-foot">
@@ -266,29 +320,30 @@
                 <h4>Request more info</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form enctype="multipart/form-data" product_id="<?php echo $product_id;?>" action="<?php echo base_url();?>request-more-info/<?php echo $product_id;?>"  id = "request_more_info_form" method="post">
+
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Full Name">
+                        <input type="text" class="form-control" name="name" placeholder="Full Name" required>
                     </div>
                     <div class="row">
                     	<div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="Email">
+                                <input type="email" class="form-control" name="email" placeholder="Email">
                             </div>
                       	</div>
                     	<div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                <input type="text" class="form-control" placeholder="Phone">
+                                <input type="text" class="form-control" name="phone" placeholder="Phone" required>
                             </div>
                       	</div>
                    	</div>
              		<input type="submit" class="btn btn-primary pull-right" value="Request Info">
                     <label class="btn-block">Preferred Contact</label>
-                    <label class="checkbox-inline"><input type="checkbox"> Email</label>
-                    <label class="checkbox-inline"><input type="checkbox"> Phone</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="preferred_contact" value="1"> Email</label>
+                    <label class="checkbox-inline"><input type="checkbox" name="preferred_contact" value="2"> Phone</label>
                 </form>
            	</div>
         </div>
@@ -304,26 +359,27 @@
                 <h4>Send to a friend</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form enctype="multipart/form-data" product_id="<?php echo $product_id;?>" action="<?php echo base_url();?>send-to-friend/<?php echo $product_id;?>"  id = "send_to_friend" method="post">
+
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="Your Name">
+                        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
                     </div>
                     <div class="row">
                     	<div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="Your Email">
+                                <input type="email" class="form-control" name="your_email" placeholder="Your Email" required>
                             </div>
                       	</div>
                     	<div class="col-md-6">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                <input type="email" class="form-control" placeholder="Friend's Email">
+                                <input type="email" class="form-control" name="friends_email" placeholder="Friend's Email" required>
                             </div>
                       	</div>
                    	</div>
-                    <textarea class="form-control" placeholder="Message"></textarea>
+                    <textarea class="form-control" name="message" placeholder="Message" required></textarea>
              		<input type="submit" class="btn btn-primary pull-right" value="Submit">
                     <div class="clearfix"></div>
                 </form>
@@ -331,4 +387,20 @@
         </div>
     </div>
 </div>
-    
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '881322258651090',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>

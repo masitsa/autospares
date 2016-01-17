@@ -35,11 +35,11 @@
 					<h2>Looking for spare parts for your car?</h2>
 					<p>We have a wide range of dealers and parts for you to choose from.</p>
 					<div class="search-form-inner">
-						<form>
+						<form action="<?php echo site_url()."search-product";?>" method="post" >
 							<div class="input-group input-group-lg">
-								<input type="text" class="form-control" placeholder="Enter category, make, model..">
+								<input type="text" class="form-control" name="search_item" placeholder="Enter category, make, model..">
 								<span class="input-group-btn">
-									<button class="btn btn-primary" type="button">Search</button>
+									<button class="btn btn-primary" type="submit">Search</button>
 								</span>
 							</div>
 							<span class="label label-warning pull-right"><?php echo $total_products;?> spares</span>

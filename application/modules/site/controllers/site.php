@@ -231,12 +231,21 @@ class Site extends MX_Controller
 	*/
 	public function products($search = '__', $category = '__', $brand = '__', $brand_model = '__', $featured_sellers = 0, $order_by = 'product_date', $order_method = 'DESC') 
 	{
+
+		$this->session->unset_userdata('product_search');
+
 		$v_data["title"] = $this->site_model->display_page_title();
 		$segment = 2;
 		$base_url = site_url().'spareparts';
+
+		$product_search = $this->session->userdata('product_search');
+		$where = "product.customer_id = customer.customer_id AND location.location_id = product.location_id AND product.category_id = category.category_id AND product.brand_model_id = brand_model.brand_model_id AND brand_model.brand_id = brand.brand_id AND product.product_status = 1";
+		if(!empty($product_search))
+		{
+			$where .= $product_search;
+		}
 		
 		$table = "product, category, brand_model, brand, location, customer";
-		$where = "product.customer_id = customer.customer_id AND location.location_id = product.location_id AND product.category_id = category.category_id AND product.brand_model_id = brand_model.brand_model_id AND brand_model.brand_id = brand.brand_id AND product.product_status = 1";
 		$order = "product_date";
 		
 		//filter by category
@@ -488,6 +497,122 @@ class Site extends MX_Controller
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('templates/general_page', $data);
 	}
+
+    public function products_search()
+	{
+		$brand_id = $this->input->post('brand_id');
+		$brand_model_id = $this->input->post('brand_model_id');
+		$category_id = $this->input->post('category_id');
+		$category_child = $this->input->post('category_child');
+		$location_id = $this->input->post('location_id');
+		$year_from = $this->input->post('year_from');
+		$year_to = $this->input->post('year_to');
+		
+		if(!empty($brand_id))
+		{
+			$brand_id = ' AND product.brand_id = '.$brand_id.' ';
+		}
+		else
+		{
+			$brand_id = '';
+		}
+
+		if(!empty($brand_model_id))
+		{
+			$brand_model_id = ' AND product.brand_model_id = '.$brand_model_id.' ';
+		}
+		else
+		{
+			$brand_model_id = '';
+		}
+
+		if(!empty($category_id))
+		{
+			$category_id = ' AND product.category_id = '.$category_id.' ';
+		}
+		else
+		{
+			$category_id = '';
+		}
+
+		if(!empty($location_id))
+		{
+			$location_id = ' AND product.location_id = '.$location_id.' ';
+		}
+		else
+		{
+			$location_id = '';
+		}
+		if(!empty($category_child))
+		{
+			$category_child = ' AND product.caategory_id = '.$category_child.' ';
+		}
+		else
+		{
+			$category_child = '';
+		}
+		
+		if(!empty($year_from) && !empty($year_to))
+		{
+			$product_year = ' AND product.product_year BETWEEN \''.$year_from.'\' AND \''.$year_to.'\'';
+			$search_title .= 'Product date from '.date('jS M Y', strtotime($year_from)).' to '.date('jS M Y', strtotime($year_to)).' ';
+		}
+		
+		else if(!empty($year_from))
+		{
+			$product_year = ' AND product.product_year = \''.$year_from.'\'';
+			$search_title .= 'Product date of '.date('jS M Y', strtotime($year_from)).' ';
+		}
+		
+		else if(!empty($year_to))
+		{
+			$product_year = ' AND product.product_year = \''.$year_to.'\'';
+			$search_title .= 'Product date of '.date('jS M Y', strtotime($year_to)).' ';
+		}
+		
+		else
+		{
+			$product_year = '';
+		}
+		
+		
+		
+		$search = $brand_id.$brand_model_id.$category_id.$category_child.$product_year.$location_id;
+		$this->session->set_userdata('product_search', $search);
+		
+		$this->products();
+	}
+	public function search_items()
+	{
+		$search_item = $this->input->post('search_item');
+
+		//search surname
+		$search_item = explode(",",$search_item);
+		$total = count($search_item);
+		
+		$count = 1;
+		$search_item = ' AND (';
+		for($r = 0; $r < $total; $r++)
+		{
+			if($count == $total)
+			{
+				$search_item .= ' brand.brand_name LIKE \'%'.mysql_real_escape_string($search_item[$r]).'%\' OR  brand_model.brand_model_name LIKE \'%'.mysql_real_escape_string($search_item[$r]).'%\' OR category.category_name LIKE \'%'.mysql_real_escape_string($search_item[$r]).'%\'';
+			}
+			
+			else
+			{
+				$search_item .= ' brand.brand_name LIKE \'%'.mysql_real_escape_string($search_item[$r]).'%\' OR  brand_model.brand_model_name LIKE \'%'.mysql_real_escape_string($search_item[$r]).'%\' OR category.category_name LIKE \'%'.mysql_real_escape_string($search_item[$r]).'%\'';
+			}
+			$count++;
+		}
+
+		$search_item .= ') ';
+		
+		$search =   $search_item;
+		$this->session->set_userdata('product_search', $search);
+		
+		$this->products();
+	}
     
 	/*
 	*
@@ -538,7 +663,87 @@ class Site extends MX_Controller
 		
 		$this->load->view('templates/general_page', $data);
 	}
-    
+    public function more_info_request($product_id)
+    {
+    	//initialize required variables
+		$v_data['name_error'] = '';
+		$v_data['phone_error'] = '';
+		$v_data['email_error'] = '';
+
+		$this->form_validation->set_error_delimiters('', '');
+		$this->form_validation->set_rules('name', 'Full name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('email', 'Email', 'trim|valid_email|xss_clean');
+		$this->form_validation->set_rules('phone', 'Phone', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('preferred_contact', 'Preferred Contact', 'trim|xss_clean');
+		
+		//if form conatins invalid data
+		if ($this->form_validation->run())
+		{
+			if($this->products_model->more_info_request($product_id))
+			{
+				$data['success'] = 'success';
+				$data['result'] = 'You request has been successfully been received. The seller will contact you shortly';
+			}
+		}
+		else
+		{
+			$validation_errors = validation_errors();
+			
+			//repopulate form data if validation errors are present
+			if(!empty($validation_errors))
+			{
+				//create errors
+				$v_data['name_error'] = form_error('name');
+				$v_data['phone_error'] = form_error('phone');
+				$v_data['email_error'] = form_error('email');
+				
+				//repopulate fields
+				$v_data['name'] = set_value('name');
+				$v_data['phone'] = set_value('phone');
+				$v_data['email'] = set_value('email');
+			}
+			
+			//populate form data on initial load of page
+			else
+			{
+				$v_data['name'] = '';
+				$v_data['email'] = '';
+				$v_data['phone'] = '';
+			}
+				$data['error'] = 'error';
+				$data['result'] = 'Sorry something went wrong, please try again';
+		}
+		echo json_encode($data);
+    }
+    public function submit_query()
+    {
+    	if($this->site_model->submit_query_details())
+		{
+			$data['success'] = 'success';
+			$data['result'] = 'You request has been successfully been received. The seller will contact you shortly';
+		}
+		else
+		{
+			$data['error'] = 'error';
+			$data['result'] = 'Sorry something went wrong, please try again';
+		}
+		echo json_encode($data);
+    }
+
+    public function send_to_friend($product_id)
+    {
+    	if($this->site_model->send_to_friend($product_id))
+		{
+			$data['success'] = 'success';
+			$data['result'] = 'You request has been successfully been received. The seller will contact you shortly';
+		}
+		else
+		{
+			$data['error'] = 'error';
+			$data['result'] = 'Sorry something went wrong, please try again';
+		}
+		echo json_encode($data);
+    }
 	/*
 	*
 	*	About
@@ -559,7 +764,10 @@ class Site extends MX_Controller
 	*/
 	public function contact()
 	{
-		$data['content'] = $this->load->view('contact', '', true);
+		$contacts = $this->site_model->get_contacts();
+		$v_data['contacts'] = $contacts;
+
+		$data['content'] = $this->load->view('contact', $v_data, true);
 		
 		$data['title'] = $this->site_model->display_page_title();
 		$this->load->view('templates/general_page', $data);

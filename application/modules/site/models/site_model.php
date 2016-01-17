@@ -426,6 +426,76 @@ class Site_model extends CI_Model
 		
 		return $crumbs;
 	}
+	public function submit_query_details()
+	{
+		$this->load->model('site/email_model');
+		$this->load->library('Mandrill', $this->config->item('mandrill_key'));
+		$data = array(
+			'name'=>ucwords(strtolower($this->input->post('name'))),
+			'email'=>$this->input->post('email'),
+			'phone'=>$this->input->post('phone'),
+			'zip'=>$this->input->post('zip'),
+			'query'=>$this->input->post('query'),
+			'created'=>date('Y-m-d')
+		);			
+		if($this->db->insert('enquiry', $data))
+		{
+			$subject = "".$this->input->post('name')."'s Autospares Query ";
+			$message = ' Name :'.$this->input->post('name').' <br>
+						 Email : '.$this->input->post('email').' <br>
+						 Phone : '.$this->input->post('phone').' <br>
+
+					<p>'.$this->input->post('query').'</p>
+					';
+			$sender_email = $this->input->post('email');
+			$shopping = "";
+			$from = $this->input->post('name');
+			
+			$button = '';
+			$button = '';
+			 $this->email_model->send_mandrill_mail('marttkip@gmail.com', "Hi Admin", $subject, $message, $sender_email, $shopping, $from, $button);
+		
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+
+
+	}
+	public function send_to_friend($product_id)
+	{
+		$friends_email = $this->input->post('friends_email');
+		$your_email = $this->input->post('your_email');
+		$name = $this->input->post('name');
+		$friends_email = $this->input->post('friends_email');
+
+		$this->load->model('site/email_model');
+		$this->load->library('Mandrill', $this->config->item('mandrill_key'));
+
+		$product_name = $this->products_model->get_product_info($product_id);
+
+		$product_details = $this->products_model->get_product_details($product_id);
+		foreach ($product_details->result() as $key) {
+			# code...
+			$tiny_url = $key->tiny_url;
+			$product_code = $key->product_code;
+		}
+
+		$subject = " Product Review ";
+		$message = '<p> Hello, Please check out this product on '.$tiny_url.'</p>
+				';
+		$sender_email = $this->input->post('your_email');
+		$shopping = "";
+		$from = $this->input->post('name');
+
+		$button = '';
+		$button = '';
+		
+		$this->email_model->send_mandrill_mail($friends_email, "Hi Admin", $subject, $message, $sender_email, $shopping, $from, $button);
+		return TRUE;
+	}
+
 }
 
 ?>

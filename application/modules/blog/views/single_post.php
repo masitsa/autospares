@@ -104,11 +104,31 @@
                     	<?php echo $this->site_model->get_breadcrumbs();?>
                     </ol>
             	</div>
-                <div class="col-md-4 col-sm-6 col-xs-4">
-                	<ul class="utility-icons social-icons social-icons-colored">
-                    	<li class="facebook"><a href="#" onclick="post_facebook_share('<?php echo $image;?>', '<?php echo $post_title;?> ', '<?php echo $tiny_url;?>')"><i class="fa fa-facebook"></i></a></li>
-                    	<li class="twitter"><a target="_blank" href="https://twitter.com/intent/tweet?screen_name=autosparesk&text=<?php echo $post_title;?>%20<?php echo $tiny_url; ?>"><i class="fa fa-twitter"></i></a></li>
-                    </ul>
+                 <div class="col-md-4 col-sm-6 col-xs-4" style="margin-top:5px;">
+                	<div data-easyshare data-easyshare-url="">
+                              <!-- Facebook -->
+                              <button data-easyshare-button="facebook">
+                                <span class="fa fa-facebook"></span>
+                                <span>Share</span>
+                              </button>
+                              <span data-easyshare-button-count="facebook">0</span>
+
+                              <!-- Twitter -->
+                              <button data-easyshare-button="twitter" data-easyshare-tweet-text="">
+                                <span class="fa fa-twitter"></span>
+                                <span>Tweet</span>
+                              </button>
+                              <span data-easyshare-button-count="twitter">0</span>
+
+                              <!-- Google+ -->
+                              <button data-easyshare-button="google">
+                                <span class="fa fa-google-plus"></span>
+                                <span>+1</span>
+                              </button>
+                              <span data-easyshare-button-count="google">0</span>
+
+                              <div data-easyshare-loader>Loading...</div>
+                            </div>
                 </div>
             </div>
       	</div>

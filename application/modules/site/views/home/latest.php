@@ -42,7 +42,7 @@
 						<span class="label label-default vehicle-age">'.$product_date.'</span>
 						<h5 class="vehicle-title"><a href="'.site_url().'spareparts/'.$product_web_name.'">'.$prod_name.'</a></h5>
 						<span class="vehicle-meta">Listed by <abbr class="user-type" title="Listed by '.$customer_name.' user">'.$customer_name.'</abbr></span>
-						<a href="'.site_url().'category/'.$category_web_name.'" title="View all '.$category_name.'s" class="vehicle-body-type"><i class="fa fa-plus"></i></a>
+						<a href="'.site_url().'spareparts/'.$product_web_name.'" title="View all '.$category_name.'s" class="vehicle-body-type"><i class="fa fa-plus"></i></a>
 						<span class="vehicle-cost">Kes '.$price.'</span>
 					</div>
 				</div>

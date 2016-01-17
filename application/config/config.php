@@ -16,8 +16,8 @@
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/autospares/';
-#$config['base_url'] = 'http://development.autospares.co.ke/';
+// $config['base_url'] = 'http://localhost/autospares/';
+$config['base_url'] = 'http://development.autospares.co.ke/';
 #$config['base_url'] = 'http://www.autospares.co.ke/';
 
 /*
@@ -390,3 +390,5 @@ $config['appID'] = '687392621328638';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+
+$config['mandrill_key']    = 'yPN5McI91NQbs7spbOUpPA';

@@ -28,3 +28,8 @@
 		  ================================================== -->
 		<script src="<?php echo base_url()."assets/themes/autostarts/";?>js/modernizr.js"></script><!-- Modernizr -->
 		<script src="<?php echo base_url()."assets/themes/autostarts/";?>js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="<?php echo base_url()."assets/dist/";?>jquery.kyco.easyshare.min.js"></script>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url()."assets/dist/";?>jquery.kyco.easyshare.css">
